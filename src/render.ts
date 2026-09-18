@@ -102,7 +102,7 @@ const STATUS_LABEL: Record<Business['status'], string> = {
  *
  * This exists because the rule was previously enforced in `card()` alone. The
  * footer linked `https://${host}/` for every business unconditionally, and the
- * licence page hard-coded both hosts — so `audit.bbanetwork.org`, which has no
+ * license page hard-coded both hosts — so `audit.bbanetwork.org`, which has no
  * DNS record, was a live dead link on every page of the site. The register's
  * own comment already said why that is worse than an absent link: it looks like
  * the whole network is broken, not one business that has not opened yet.
@@ -221,7 +221,7 @@ function layout({ title, description, path, body }: PageOptions): string {
     <nav aria-label="Primary">
       <a href="/#businesses">Businesses</a>
       <a href="/about">About</a>
-      <a href="/licence">Licence</a>
+      <a href="/license">License</a>
       <a href="mailto:${CONTACT_EMAIL}">Contact</a>
     </nav>
   </div>
@@ -246,7 +246,7 @@ ${body}
         <h4>Network</h4>
         <ul>
           <li><a href="/about">About BBA Network</a></li>
-          <li><a href="/licence">Licence &amp; refunds</a></li>
+          <li><a href="/license">License &amp; refunds</a></li>
           <li><a href="/api/stats">Network status</a></li>
         </ul>
       </div>
@@ -410,13 +410,13 @@ function permissions(allowed: string[], refused: string[]): string {
     ${list(refused, bulletStop, 'may-not')}`;
 }
 
-export function renderLicence(): string {
+export function renderLicense(): string {
   const body = `
 <section class="section">
   <div class="wrap">
     <div class="prose">
-      <p class="eyebrow">Licence &amp; refunds</p>
-      <h1>Licence &amp; refunds</h1>
+      <p class="eyebrow">License &amp; refunds</p>
+      <h1>License &amp; refunds</h1>
       <p class="lead">
         What you can do with what you buy, and how to get your money back if it was not
         worth it. Three businesses, three sets of terms &mdash; they sell different things.
@@ -551,7 +551,7 @@ ${rule()}
       <h2 id="production">BBA Production</h2>
       <p class="applies">
         Applies to a build bought from ${businessLinkById('production')}
-        &mdash; software handed over as a repository, not a licence to use ours.
+        &mdash; software handed over as a repository, not a license to use ours.
       </p>
 
       ${permissions(
@@ -619,11 +619,11 @@ ${rule()}
 </section>`;
 
   return layout({
-    title: 'Licence & refunds — BBA Network',
+    title: 'License & refunds — BBA Network',
     description:
       'What you can do with what you buy from BBA Network, and how refunds work — for the ' +
       'printable guides, the Website Health Check, and a build from BBA Production.',
-    path: '/licence',
+    path: '/license',
     body,
   });
 }
@@ -658,7 +658,7 @@ export function renderNotFound(): string {
 
 /** Only live, listed businesses belong in a sitemap. */
 export function renderSitemap(): string {
-  const urls = ['/', '/about', '/licence']
+  const urls = ['/', '/about', '/license']
     .map((p) => `  <url><loc>https://${APEX}${p}</loc></url>`)
     .join('\n');
 

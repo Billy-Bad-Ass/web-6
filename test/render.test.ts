@@ -14,7 +14,7 @@ import { describe, it, expect } from 'vitest';
 import {
   renderHome,
   renderAbout,
-  renderLicence,
+  renderLicense,
   renderNotFound,
   renderSitemap,
   esc,
@@ -291,8 +291,8 @@ describe('the footer Support column', () => {
   });
 });
 
-describe('the Licence page', () => {
-  const html = renderLicence();
+describe('the License page', () => {
+  const html = renderLicense();
   // The source wraps prose across lines, so a phrase can straddle a newline
   // and several spaces. Assert against the text a reader sees, not the
   // whitespace the template happens to use.
@@ -316,7 +316,7 @@ describe('the Licence page', () => {
     const nav = jump.slice(0, jump.indexOf('</nav>'));
 
     for (const business of PUBLIC_BUSINESSES) {
-      expect(html, `no <h2 id="${business.id}"> on the licence page`).toContain(
+      expect(html, `no <h2 id="${business.id}"> on the license page`).toContain(
         `id="${business.id}"`,
       );
       expect(nav, `${business.id} missing from the jump nav`).toContain(`href="#${business.id}"`);
@@ -350,20 +350,20 @@ describe('the Licence page', () => {
 
   it('does not double-escape the ampersand in its title', () => {
     // layout() escapes the title, so an entity written here comes out as
-    // "Licence &amp;amp; refunds" in the browser tab.
-    expect(html).toContain('<title>Licence &amp; refunds — BBA Network</title>');
+    // "License &amp;amp; refunds" in the browser tab.
+    expect(html).toContain('<title>License &amp; refunds — BBA Network</title>');
     expect(html).not.toContain('&amp;amp;');
   });
 
   it('is linked from the nav, between About and Contact', () => {
     const nav = html.slice(html.indexOf('<nav aria-label="Primary">'));
     const block = nav.slice(0, nav.indexOf('</nav>'));
-    expect(block.indexOf('/about')).toBeLessThan(block.indexOf('/licence'));
-    expect(block.indexOf('/licence')).toBeLessThan(block.indexOf('mailto:'));
+    expect(block.indexOf('/about')).toBeLessThan(block.indexOf('/license'));
+    expect(block.indexOf('/license')).toBeLessThan(block.indexOf('mailto:'));
   });
 
   it('is in the sitemap', () => {
-    expect(renderSitemap()).toContain('<loc>https://bbanetwork.org/licence</loc>');
+    expect(renderSitemap()).toContain('<loc>https://bbanetwork.org/license</loc>');
   });
 
   it('is well-formed', () => {
@@ -396,7 +396,7 @@ describe('the Licence page', () => {
  * network is broken, not like one business that has not opened yet.
  *
  * That rule was real in `card()` and nowhere else. The footer rendered
- * `https://${host}/` for every business on every page, and the licence page
+ * `https://${host}/` for every business on every page, and the license page
  * hard-coded both hosts in prose. `audit.bbanetwork.org` has no DNS record, so
  * it was a dead link sitewide.
  *
@@ -407,7 +407,7 @@ describe('links to business hosts', () => {
   const pages: Array<[string, string]> = [
     ['home', renderHome()],
     ['about', renderAbout()],
-    ['licence', renderLicence()],
+    ['license', renderLicense()],
     ['404', renderNotFound()],
   ];
 

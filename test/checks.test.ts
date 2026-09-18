@@ -44,6 +44,22 @@ function expectedFor(rule: (typeof LEGACY_RULES)[number]) {
 }
 
 /**
+ * Adds the license page's old spelling to a fixture.
+ *
+ * Every fixture needs it. The guard probes `/licence` on every run, and unlike
+ * the hub's other own paths this one answers 301 rather than 200 — so the
+ * stub's unnamed-means-200 default describes it wrongly rather than not at
+ * all, and a fixture missing it fails for a reason that has nothing to do with
+ * what the test is about.
+ */
+function withLegacyLicensePath(
+  routes: Record<string, { status: number; location?: string } | null>,
+) {
+  routes[`${APEX_BASE}/licence`] = { status: 301, location: '/license' };
+  return routes;
+}
+
+/**
  * Every legacy rule answering correctly, and every bridged host answering
  * nothing.
  *
@@ -61,7 +77,7 @@ function allRulesPassing(): Record<string, { status: number; location?: string }
   for (const business of BRIDGED) {
     routes[`https://${business.host}/`] = business.status === 'live' ? { status: 200 } : null;
   }
-  return routes;
+  return withLegacyLicensePath(routes);
 }
 
 describe('redirectGuard', () => {
@@ -117,11 +133,11 @@ describe('redirectGuard', () => {
 
   it("fails when one of the hub's own paths is swallowed by a redirect", async () => {
     const routes = allRulesPassing();
-    routes[`${APEX_BASE}/licence`] = { status: 301, location: `${STORE}/licence` };
+    routes[`${APEX_BASE}/license`] = { status: 301, location: `${STORE}/license` };
 
     const result = await redirectGuard(stub(routes), APEX_BASE);
     expect(result.ok).toBe(false);
-    expect(result.problems.join(' ')).toContain('/licence expected 200, got 301');
+    expect(result.problems.join(' ')).toContain('/license expected 200, got 301');
   });
 });
 
@@ -397,7 +413,7 @@ describe('redirectGuard and www', () => {
     const routes: Record<string, { status: number; location?: string } | null> = {};
     for (const rule of LEGACY_RULES) routes[`${APEX_BASE}${rule.prefix}/probe`] = expectedFor(rule);
     for (const b of BRIDGED) routes[`https://${b.host}/`] = b.status === 'live' ? { status: 200 } : null;
-    return routes;
+    return withLegacyLicensePath(routes);
   }
 
   it('accepts the redirect to the apex that is there today', async () => {
@@ -451,7 +467,7 @@ describe('redirectGuard and a bridged host', () => {
   function rulesOnly() {
     const routes: Record<string, { status: number; location?: string } | null> = {};
     for (const rule of LEGACY_RULES) routes[`${APEX_BASE}${rule.prefix}/probe`] = expectedFor(rule);
-    return routes;
+    return withLegacyLicensePath(routes);
   }
 
   it('does not complain about a dormant bridge whose card says building', async () => {

@@ -37,7 +37,7 @@ then `docs/DOMAINS.md` if you are touching anything to do with hosts.
 
 6. **All artwork is original, and stays that way.** Every mark, illustration
    and icon is drawn in `src/motifs.ts`. Do not paste in a glyph from an icon
-   set: it brings its licence with it, and most require a visible credit on
+   set: it brings its license with it, and most require a visible credit on
    every page it appears — which is exactly what was removed from the footer.
 
 ## Before you push

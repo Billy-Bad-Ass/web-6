@@ -96,7 +96,7 @@ simple shapes was the cheaper trade. Nothing on the site is borrowed artwork.
    something the system does not have, add it here so all three get it.
 3. **Do not paste in a borrowed icon.** Everything here is original, which is
    why no page carries a third-party credit. A glyph lifted from an icon set
-   brings its licence with it — and most of them require attribution on every
+   brings its license with it — and most of them require attribution on every
    page it appears.
 4. **Both themes or neither.** A colour defined only in the dark block is a bug.
 
