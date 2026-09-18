@@ -135,7 +135,7 @@ export const BUSINESSES: Business[] = [
      * Off the hub since 2026-09-04, at Billy's request, and going back on
      * later. `unlisted` rather than deleting the entry, because the store is
      * still open and still taking checkout: /go/guides, the receipt redirects
-     * in src/redirects.ts and the licence terms all keep working, and a
+     * in src/redirects.ts and the license terms all keep working, and a
      * customer holding an old download link is not stranded. Putting it back
      * is deleting this one line.
      */

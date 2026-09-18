@@ -119,13 +119,27 @@ export async function redirectGuard(
   }
 
   // The hub's own endpoints, which must never be swallowed by a redirect rule.
-  // /licence is here because it was a 301 to the store until the hub took it
+  // /license is here because it was a 301 to the store until the hub took it
   // back, and a future rule could quietly reclaim it — taking the terms a
   // customer agreed to at checkout with it.
-  for (const own of ['/api/health', '/api/stats', '/licence']) {
+  for (const own of ['/api/health', '/api/stats', '/license']) {
     const { status } = await probe(fetcher, `${base}${own}`);
     log.push(`${own} → ${status}`);
     if (status !== 200) problems.push(`${own} expected 200, got ${status}`);
+  }
+
+  // The license page's old spelling. Receipts issued before the page moved
+  // link to it, so it is as load-bearing as any rule in LEGACY_RULES — and it
+  // lives in the switch rather than in that table, which is exactly the kind
+  // of redirect nothing else here would notice going missing.
+  {
+    const { status, location } = await probe(fetcher, `${base}/licence`);
+    log.push(`/licence → ${status} ${location ?? ''}`.trim());
+    if (status !== 301) {
+      problems.push(`/licence expected 301, got ${status}`);
+    } else if (location !== '/license' && location !== `${base}/license`) {
+      problems.push(`/licence pointed at ${location ?? '<none>'}, expected /license`);
+    }
   }
 
   // Does the place all of that points to actually exist? Deliberately tolerant

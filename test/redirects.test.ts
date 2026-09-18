@@ -65,12 +65,12 @@ describe('legacy apex redirects', () => {
       expect(at('/go/guides')).toBeNull();
     });
 
-    it('keeps /licence, which the hub now serves for the whole network', () => {
-      // It used to 301 to the store. The hub's own licence page covers the
-      // guides and the health check, so a receipt link to bbanetwork.org/licence
+    it('keeps /license, which the hub now serves for the whole network', () => {
+      // It used to 301 to the store. The hub's own license page covers the
+      // guides and the health check, so a receipt link to bbanetwork.org/license
       // now lands on terms that describe what was bought rather than being
       // bounced to a page about only half the network.
-      expect(at('/licence')).toBeNull();
+      expect(at('/license')).toBeNull();
     });
 
     it('keeps its own /api/stats and /api/health despite the /api rule', () => {

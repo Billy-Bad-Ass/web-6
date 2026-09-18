@@ -221,7 +221,7 @@ refactor and a customer who cannot download what they paid for.
 ### What was lost, and it is worth naming
 
 The old workflow ran a **smoke test against the live site after every deploy** —
-the download redirect, the 301s, `/licence`, `/brand/v1.css`. Workers Builds has
+the download redirect, the 301s, `/license`, `/brand/v1.css`. Workers Builds has
 no equivalent hook, so that check is gone from the deploy path.
 
 The redirect guard still covers all of it, but daily rather than per-deploy. So

@@ -227,7 +227,7 @@ export const CARD_ART: Record<string, () => string> = {
  * The negative of the bullet: the bar, with the terminator missing.
  *
  * Used for the "what you may not do" lists. A red cross would be the obvious
- * choice and the wrong one — these are the terms of a licence, not errors the
+ * choice and the wrong one — these are the terms of a license, not errors the
  * reader has made. The signal simply stops short of landing, which says the
  * same thing without telling somebody off for reading.
  */

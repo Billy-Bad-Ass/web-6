@@ -24,7 +24,7 @@ than an alarming report. Say which of the two it is.
 2. **`/api/checkout` and `/api/stripe/webhook`** — money in flight. These must
    answer `308`, never `301` or `302`: those permit a client to rewrite a POST
    into a GET, which turns a payment into a silent no-op.
-3. **`/products/*`, `/success`, `/licence`** — indexed pages and the
+3. **`/products/*`, `/success`, `/license`** — indexed pages and the
    post-purchase path. A `301` is correct for these.
 4. **`/api/health`, `/api/stats`** — the hub's own. These must NOT be forwarded
    to the store; `HUB_OWNED` in `src/redirects.ts` is what holds that line.
