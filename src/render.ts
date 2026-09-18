@@ -261,8 +261,6 @@ ${body}
 }
 
 export function renderHome(): string {
-  const liveCount = PUBLIC_BUSINESSES.filter((b) => b.status === 'live').length;
-
   const body = `
 <section class="hero">
   ${signalField()}
@@ -271,8 +269,6 @@ export function renderHome(): string {
     <h1>One network. Separate businesses.</h1>
     <p class="lede">
       BBA Network builds small, self-contained products that solve one problem properly.
-      Each one runs on its own domain, takes its own payments, and stands or falls on its own.
-      This page is the index.
     </p>
     <div class="hero-meta">
       <span>${icon('lock')} Payments handled by Stripe</span>
@@ -288,24 +284,6 @@ ${rule()}
     <div class="section-head">
       <p class="eyebrow">The businesses</p>
       <h2>What BBA Network sells</h2>
-      <p>
-        ${
-          /*
-           * Neither branch counts out loud any more. This read "Both are
-           * live", which was true of two businesses and became a factual
-           * error the moment a third was added — the kind that survives
-           * because nobody re-reads the sentence they are not editing.
-           *
-           * Nor does either branch promise a checkout. Two of these sell a
-           * fixed thing and take card payment for it; BBA Production is
-           * quoted per project, and a hub promising "its own checkout" for
-           * every business is selling something one of them does not have.
-           */
-          liveCount === PUBLIC_BUSINESSES.length
-            ? 'Every one of them is live. Each has its own site and its own support address.'
-            : 'Each gets its own subdomain, its own site and its own support address. Anything not yet reachable says so here rather than sending you to a dead link.'
-        }
-      </p>
     </div>
     <div class="cards">
       ${PUBLIC_BUSINESSES.map(card).join('\n')}
